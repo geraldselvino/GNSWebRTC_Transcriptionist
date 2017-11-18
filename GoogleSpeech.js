@@ -1,5 +1,5 @@
 function initializeGoogleSpeech() {
-    gapi.client.setApiKey('AIzaSyBYaNO1it65RbcWbw35yENMgQXtszcV3Pw');
+    gapi.client.setApiKey('your google api key here');
 
     // Load the speech client library via its discovery URL
     gapi.client.load('https://speech.googleapis.com/$discovery/rest?version=v1');
