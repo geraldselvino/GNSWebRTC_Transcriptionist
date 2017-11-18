@@ -11,10 +11,13 @@ Sample usage
 ============
 
 ```javascript
-//First step in using this library is to create a google cloud account. If you have a gmail, you can just login
-//with that in https://cloud.google.com/speech/. After logging-in, go to console -> then APIs & services -> Library
-//in the search box type speech, click the enable switch. Next go again to console -> APIS & services -> credentials
-//from that page, generate an API key and copy that key to initializeGoogleSpeech() in GoogleSpeech.js
+//First step in using this library is to create a google cloud account. 
+//If you have a gmail, you can just login with that in https://cloud.google.com/speech/. 
+//After logging-in, go to console -> then APIs & services -> Library
+//in the search box type speech, click the enable switch. Next go again to 
+//console -> APIS & services -> credentials from that page, generate an API key and copy 
+//that key to initializeGoogleSpeech() in GoogleSpeech.js.
+//
 // e.g. your API key is: AIzaSyBYaNO1it65RbcWbw35yENMgQXtszcV3Pw
 //
 //function initializeGoogleSpeech() {
@@ -36,18 +39,21 @@ Sample usage
 ```javascript
 //Instantiate the transcriptionist object
 var mytranscriptionist = new Transcriptionist(/*your source stream here*/);
-//Note: You can leave the source stream then you can set it via mystranscriptionist.setStream(mystream)
+//Note: You can leave the source stream then you can set it 
+//via mystranscriptionist.setStream(mystream)
+//
 //e.g. of source streams
-//From a webm file
+//--From a webm file--
 //
-//From the microphone
+//--From the microphone--
 //
-//For the WebRTC audio, that depends on your implementation but simply get the stream from the RTP/SRTP channels
-//then pass it as parameter
+//For the WebRTC audio, that depends on your implementation but simply get 
+//the stream from the RTP/SRTP channels then pass it as parameter
 
-mystranscriptionist.start(); // This will start the audio capture from the source stream
+mystranscriptionist.start(); //This will start the audio capture from the source stream
 
-mytranscriptionist.stop(); // This will stop the audio capture, decode then send to google speech for transcription.
+mytranscriptionist.stop(); //This will stop the audio capture, decode then send to 
+                           //google speech for transcription.
 
 mystranscriptionist.onTranscript = function(transcript) {
     //This is the event handler that will be called once the transcript arrived.
