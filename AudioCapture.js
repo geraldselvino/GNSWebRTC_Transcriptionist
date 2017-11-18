@@ -1,4 +1,4 @@
-function AudioCapture(config) {
+function AudioCapture(config, callbackhandler) {
     if (!config.stream) {
         config.recorder = undefined;
         config.datachunks = [];
@@ -38,7 +38,7 @@ function AudioCapture(config) {
                                         for (j = 0; j < r.results.length; ++j) {
                                             transcript += r.results[j].alternatives[0].transcript;
                                         }
-                                        config.transcript = transcript;
+                                        callbackhandler(transcript);
                                     }
                                 }
                             );
