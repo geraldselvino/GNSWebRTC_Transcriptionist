@@ -1,12 +1,15 @@
 function Config() {
     this.recorder = undefined;
     this.datachunks = [];
+    this.stream = undefined;
 }
 
 function Transcriptionist(mediastream) {
     this.sessionconfig = new Config();
-    this.sessionconfig.stream = mediastream;
-    this.onTranscript = function(transcript){}
+    if (mediastream)
+        this.sessionconfig.stream = mediastream;
+
+    this.onTranscript = function(transcript) {}
 }
 
 Transcriptionist.prototype = {
@@ -18,6 +21,7 @@ Transcriptionist.prototype = {
             this.sessionconfig.recorder.stop();
     },
     setStream: function(mediastream) {
-        this.sessionconfig.stream = mediastream;
+        if (mediastream)
+            this.sessionconfig.stream = mediastream;
     }
 }

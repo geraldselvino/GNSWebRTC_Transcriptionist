@@ -40,55 +40,64 @@ Sample usage
 //Instantiate the transcriptionist object
 var mytranscriptionist = new Transcriptionist(/*your source stream here*/);
 //Note: You can leave the source stream then you can set it 
-//via mystranscriptionist.setStream(mystream)
+//via mytranscriptionist.setStream(mystream)
 //
 //e.g. of source streams
 //--From a webm file--
 //Use file input to browse for the webm audio file
 //<input type="file" onChange="readFile(this);"/>
+//var mytranscriptionist = new Transcriptionist();
 //function readFile (evt) {
 //    var files = evt.target.files;
 //    var file = files[0];
 //    var reader = new FileReader();
 //    reader.onload = function(event) {
-//        var mytranscriptionist = new Transcriptionist(event.target.result);
-//        mystranscriptionist.start();
-//        mystranscriptionist.onTranscript = function(transcript) {
-//            alert(transcript);
-//        }
+//        mytranscriptionist.setStream(event.target.result);
+//        mytranscriptionist.start();
 //    }
 //    reader.readAsArrayBuffer(file)
+//}
+//window.setTimeout(function() {
+//    mytranscriptionist.stop();    
+//}, 5000);
+//mytranscriptionist.onTranscript = function(transcript) {
+//    alert(transcript);
 //}
 //
 //--From the microphone--
 //navigator.getUserMedia = navigator.getUserMedia ||
 //                         navigator.webkitGetUserMedia ||
 //                         navigator.mozGetUserMedia;
-//
+//var mytranscriptionist = new Transcriptionist();
 //navigator.getUserMedia({ audio: true },
 //                       function(stream) {
-//                           var mytranscriptionist = new Transcriptionist(stream);
-//                           mystranscriptionist.start();
-//                           mystranscriptionist.onTranscript = function(transcript) {
-//                               alert(transcript);
-//                           }
+//                           mytranscriptionist.setStream(stream);
+//                           mytranscriptionist.start();
 //                       },
-//                       function(err) { console.error(err); }
+//                       function(err) { 
+//                           console.error(err); 
+//                       }
 //                      );
+//window.setTimeout(function() {
+//    mytranscriptionist.stop();    
+//}, 5000);
+//mytranscriptionist.onTranscript = function(transcript) {
+//    alert(transcript);
+//}
 //
-//--From WebRTC audio--
+//--From remote WebRTC audio--
 //this depends on your implementation but basically just get 
 //the stream from the RTP/SRTP channels then pass that in the parameter
 
-mystranscriptionist.start(); //This will start the audio capture from the source stream
+mytranscriptionist.start(); //This will start the audio capture from the source stream
 
 mytranscriptionist.stop(); //This will stop the audio capture, decode then send to 
                            //google speech for transcription.
 
-mystranscriptionist.onTranscript = function(transcript) {
+mytranscriptionist.onTranscript = function(transcript) {
     //This is the event handler that will be called once the transcript arrived.
     //Add your logic to make use of the transcript
-} 
+}; 
 ```
 
 

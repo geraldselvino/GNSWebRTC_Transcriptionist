@@ -35,8 +35,8 @@ function AudioCapture(config, callbackhandler) {
                                 function(result) {
                                     if (result.results && result.results[0]) {
                                         var transcript = "";
-                                        for (j = 0; j < r.results.length; ++j) {
-                                            transcript += r.results[j].alternatives[0].transcript;
+                                        for (j = 0; j < result.results.length; ++j) {
+                                            transcript += result.results[j].alternatives[0].transcript;
                                         }
                                         callbackhandler(transcript);
                                     }
@@ -50,7 +50,7 @@ function AudioCapture(config, callbackhandler) {
                             newblob = null;
                             audioctx.close();
                             audioctx = null;
-                            console.error(e)
+                            console.error(e);
                         }
                     );
                     filereader = null;
@@ -71,7 +71,7 @@ function AudioCapture(config, callbackhandler) {
     } catch(exception) {
         config.recorder = undefined;
         config.datachunks = [];
-        console.error(exception)
+        console.error(exception);
     }
 }
 
@@ -80,10 +80,12 @@ function downSampleToPCM16(buffer, inputsamplerate, targetsamplerate) {
         console.warn("No operation! Input sample rate is the same as target sample rate.");
         return buffer;
     }
+
     if (targetsamplerate > inputsamplerate) {
         console.error("Target sample rate should be smaller than the input sample rate");
         return null;
     }
+
     var ratio = inputsamplerate / targetsamplerate;
     var newbuffersize = Math.round(buffer.length / ratio);
     var result = new Int16Array(newbuffersize);
@@ -92,13 +94,13 @@ function downSampleToPCM16(buffer, inputsamplerate, targetsamplerate) {
     while (offsetresult < result.length) {
         var nextoffsetbuffer = Math.round((offsetresult + 1) * ratio);
         var accum = 0, count = 0;
-        for (var i = offsetbuffer; i < nextoffsetbuffer && i < buffer.length; i++) {
+        for (var i = offsetbuffer; i < nextoffsetbuffer && i < buffer.length; ++i) {
             accum += buffer[i];
-            count++;
+            ++count;
         }
 
         result[offsetresult] = Math.min(1, accum / count) * 0x7FFF;
-        offsetresult++;
+        ++offsetresult;
         offsetbuffer = nextoffsetbuffer;
     }
 
