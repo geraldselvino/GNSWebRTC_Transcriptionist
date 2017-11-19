@@ -45,9 +45,7 @@ var mytranscriptionist = new Transcriptionist(/*your source stream here*/);
 //e.g. of source streams
 //--From a webm file--
 //Use file input to browse for the webm audio file
-```html
 //<input type="file" onChange="readFile(this);"/>
-```
 //function readFile (evt) {
 //    var files = evt.target.files;
 //    var file = files[0];
