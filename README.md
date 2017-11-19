@@ -44,11 +44,43 @@ var mytranscriptionist = new Transcriptionist(/*your source stream here*/);
 //
 //e.g. of source streams
 //--From a webm file--
+//Use file input to browse for the webm audio file
+```html
+//<input type="file" onChange="readFile(this);"/>
+```
+//function readFile (evt) {
+//    var files = evt.target.files;
+//    var file = files[0];
+//    var reader = new FileReader();
+//    reader.onload = function(event) {
+//        var mytranscriptionist = new Transcriptionist(event.target.result);
+//        mystranscriptionist.start();
+//        mystranscriptionist.onTranscript = function(transcript) {
+//            alert(transcript);
+//        }
+//    }
+//    reader.readAsArrayBuffer(file)
+//}
 //
 //--From the microphone--
+//navigator.getUserMedia = navigator.getUserMedia ||
+//                         navigator.webkitGetUserMedia ||
+//                         navigator.mozGetUserMedia;
 //
-//For the WebRTC audio, that depends on your implementation but simply get 
-//the stream from the RTP/SRTP channels then pass it as parameter
+//navigator.getUserMedia({ audio: true },
+//                       function(stream) {
+//                           var mytranscriptionist = new Transcriptionist(stream);
+//                           mystranscriptionist.start();
+//                           mystranscriptionist.onTranscript = function(transcript) {
+//                               alert(transcript);
+//                           }
+//                       },
+//                       function(err) { console.error(err); }
+//                      );
+//
+//--From WebRTC audio--
+//this depends on your implementation but basically just get 
+//the stream from the RTP/SRTP channels then pass that in the parameter
 
 mystranscriptionist.start(); //This will start the audio capture from the source stream
 
