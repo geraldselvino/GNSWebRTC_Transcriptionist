@@ -9,7 +9,7 @@ function Transcriptionist(mediastream) {
     if (mediastream)
         this.sessionconfig.stream = mediastream;
 
-    this.onTranscript = function(transcript) {}
+    this.onTranscript = function(transcript) {};
 }
 
 Transcriptionist.prototype = {
