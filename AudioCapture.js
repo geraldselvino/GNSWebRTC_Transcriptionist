@@ -1,3 +1,20 @@
+/**********************************************************
+* Copyright (c) 2017, Gerald Selvino 
+* <gerald.selvino@protonmail.com> All rights reserved.
+*
+* This JS contains functions to capture the audio source 
+* stream into webm format, decodes it to raw PCM 32, then
+* down sample it to PCM 16 Khz 16 bit for google speech, then
+* finally send the audio to google speech for transcription
+***********************************************************/
+
+/**
+* @brief The main function, captures the source stream referenced in
+* config.stream, decode, down sample and transcribe
+* @param config - A structure that contains all the necessary input
+* @param callbackhandler - the callback function to be called once
+* the transcript has arrived.
+*/ 
 function AudioCapture(config, callbackhandler) {
     if (!config.stream) {
         config.recorder = undefined;
@@ -75,6 +92,14 @@ function AudioCapture(config, callbackhandler) {
     }
 }
 
+/**
+* @brief Function to down sample the decoded raw audio to 16 Khz,
+* it also makes it 16 bit. This is the specs accepted by google speech
+* @param buffer - The ArrayBuffer that contains the raw audio (PCM)
+* @param inputsamplerate - The current sample rate of the buffer
+* @param targetsamplerate - The target sample rate for the new audio,
+* for google speech, this will always be 16000 Hz.
+*/ 
 function downSampleToPCM16(buffer, inputsamplerate, targetsamplerate) {
     if (targetsamplerate == inputsamplerate) {
         console.warn("No operation! Input sample rate is the same as target sample rate.");
