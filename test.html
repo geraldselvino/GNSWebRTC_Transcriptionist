@@ -1,0 +1,51 @@
+<!--
+***********************************************************
+* Copyright (c) 2017, Gerald Selvino
+* <gerald.selvino@protonmail.com> All rights reserved.
+*
+* The test client for this library. For 10 seconds,
+* the page will listen to the microphone, capture the
+* audio then send it to Google speech for transcription.
+* It will show a popup message box containing the
+* transcript after that.
+***********************************************************
+-->
+<html>
+<head>
+    <script type="text/javascript" src="GoogleSpeech.js"></script>
+    <script type="text/javascript" src="AudioCapture.js"></script>
+    <script type="text/javascript" src="Transcriptionist.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/client:api.js?onload=initializeGoogleSpeech"></script>
+</head>
+<body>
+    <h3>Speak in your microphone now...</h3>
+    <h5>App is listening for 10 seconds</h5>
+    <script type="text/javascript">
+        navigator.getUserMedia = navigator.getUserMedia ||
+                                    navigator.webkitGetUserMedia ||
+                                    navigator.mozGetUserMedia;
+
+        var mytranscriptionist = new Transcriptionist();
+
+        navigator.getUserMedia({ audio: true },
+                                function (stream) {
+                                    mytranscriptionist.setStream(stream);
+                                    mytranscriptionist.start();
+                                },
+                                function (err) {
+                                    console.error(err);
+                                }
+                                );
+
+        //Allow 10 seconds to record voice
+        window.setTimeout(function () {
+            mytranscriptionist.stop();
+        }, 10000);
+
+        //Show the transcript
+        mytranscriptionist.onTranscript = function (transcript) {
+            alert("Transcript is: \n" + transcript);
+        }
+    </script>
+</body>
+</html>

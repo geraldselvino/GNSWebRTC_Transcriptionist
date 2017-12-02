@@ -12,6 +12,7 @@
 * @brief The main function, captures the source stream referenced in
 * config.stream, decode, down sample and transcribe
 * @param config - A structure that contains all the necessary input
+* parameters
 * @param callbackhandler - the callback function to be called once
 * the transcript has arrived.
 */ 

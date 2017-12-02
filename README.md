@@ -100,4 +100,5 @@ mytranscriptionist.onTranscript = function(transcript) {
 }; 
 ```
 
+**Please check the test web page (test.html) for working sample**
 
